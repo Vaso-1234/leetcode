@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int totalNumbers(vector<int>& digits) {
+        int cnt[10] = {};
+
+        for (int x : digits)
+            cnt[x]++;
+
+        int ans = 0;
+
+        for (int num = 100; num <= 998; num += 2) {
+            int x = num;
+
+            int a = x % 10;
+            x /= 10;
+            int b = x % 10;
+            x /= 10;
+            int c = x % 10;
+
+            int need[10] = {};
+            need[a]++;
+            need[b]++;
+            need[c]++;
+
+            bool ok = true;
+
+            for (int i = 0; i < 10; i++) {
+                if (need[i] > cnt[i]) {
+                    ok = false;
+                    break;
+                }
+            }
+
+            if (ok)
+                ans++;
+        }
+
+        return ans;
+    }
+};
